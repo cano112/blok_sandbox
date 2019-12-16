@@ -1,0 +1,16 @@
+version: '3'
+services:
+  hyperflow:
+    build: ../hyperflow_config
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - ../hyperflow/examples:/examples:ro
+    links:
+      - redis
+    ports:
+      - "8080:80"
+    environment:
+      - REDIS_URL=redis://redis
+  redis:
+    image: "redis:alpine"
